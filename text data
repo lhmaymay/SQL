@@ -16,7 +16,7 @@ a    a2  sa2
 b    b1  sb1
 ..........
 
-# sanity check: any missing, outliers, duplicates/tie scores?
+# sanity check: any missing, outliers, duplicates/tie scores, incomplete data?
 ***** for each product find the top 5 rec products with higher scores *****
 create table test as ( select * from (select proc,rec,rank() over (partition by proc order by score desc) as rk from table) ) where rk<=5
 

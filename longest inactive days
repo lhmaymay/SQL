@@ -1,0 +1,15 @@
+table one:user_id, acct_id
+table two:acct_id, date, activity (all equal to 1)
+
+# for each user find # of longest inactive days
+
+select distinct m.user_id,max(diff) as max_inactive_days
+from
+(select a.user_id, a.date, lag(a.date,1) over (partition by user_id order by date) as prev_date, 
+case when prev_date is not null then datediff(day,prev_date,date) else 0 as diff
+from
+(select a.user_id,b.date from one a
+left join two b
+on a.acct_id=b.acct_id
+order by user_id, date) a) m
+group by m.user_id

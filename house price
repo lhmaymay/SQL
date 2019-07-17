@@ -7,6 +7,6 @@ table two:property_id, date, price
 select a.*, b.price 
 from one a
 left join
-(select *,rank() over (partition by property_id order by date desc price desc) as rk from two) b
+(select *,rank() over (partition by property_id order by date desc, price desc) as rk from two) b
 on a.property_id=b.property_id
 

@@ -1,0 +1,36 @@
+SELECT CONCAT_WS( ' - ', database_id, recovery_model_desc, containment_desc) AS DatabaseInfo
+FROM sys.databases;
+
+DatabaseInfo
+1 - SIMPLE - NONE
+2 - SIMPLE - NONE
+3 - FULL - NONE
+4 - SIMPLE - NONE
+
+
+***** recommender system *****
+prod rec score
+a    a1  sa1
+a    a2  sa2
+..........
+b    b1  sb1
+..........
+
+# sanity check: any missing, outliers, duplicates/tie scores?
+***** for each product find the top 5 rec products with higher scores *****
+create table test as ( select * from (select proc,rec,rank() over (partition by proc order by score desc) as rk from table) ) where rk<=5
+
+select a1.prod,'<'|concat_ws(',',a2.rec,a3.rec,a4.rec,a5.rec) |'<' as recod from 
+(select * from test where rk=1) a1
+inner join 
+(select * from test where rk=2) a2
+on a1.prod=a2.prod
+inner join 
+(select * from test where rk=3) a3
+on a1.prod=a3.prod
+inner join 
+(select * from test where rk=4) a4
+on a1.prod=a4.prod
+inner join 
+(select * from test where rk=5) a5
+on a1.prod=a5.prod

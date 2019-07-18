@@ -8,4 +8,4 @@ table one: user_id session_id timestamp   activity
            what if most duration is missing, cap at 60 sec?
            incomplete without end_table time
            
-           where to get the data if most missing
+           where to get the data to use as the proxy for cap if most missing

@@ -7,3 +7,5 @@ table one: user_id session_id timestamp   activity
                                           end_ppt
            what if most duration is missing, cap at 60 sec?
            incomplete without end_table time
+           
+           where to get the data if most missing

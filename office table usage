@@ -1,0 +1,9 @@
+# product health metrics
+table one: user_id session_id timestamp   activity
+                                          start_table
+                                          end_table
+                                          .....
+                                          start_ppt
+                                          end_ppt
+           what if most duration is missing, cap at 60 sec?
+           incomplete without end_table time

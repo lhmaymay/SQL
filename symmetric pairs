@@ -1,0 +1,13 @@
+SELECT DISTINCT a.X, a.Y
+FROM Functions a, Functions b
+WHERE a.X = b.Y AND a.Y = b.X
+AND a.X < a.Y
+
+UNION
+
+SELECT X, Y
+FROM Functions
+where X = Y
+GROUP BY X, Y
+having COUNT(*) > 1
+ORDER BY 1

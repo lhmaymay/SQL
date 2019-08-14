@@ -16,7 +16,7 @@ user2       | 09-05-2014    | 199
 user2       | 09-06-2014    | 0
 user2       | 09-07-2014    | 155
 
-Should only count consecutive days (as Result) if [UserCode] is something else than zero. 
+#1: Should only count consecutive days (as Result) if [UserCode] is something else than zero. 
 UserDate is between 09-01-2014 and 09-11-2014. Show result only if Result is 2 or more.
 
 show
@@ -26,3 +26,4 @@ user1       | 09-01-2014    | 09-03-2014    | 2
 user1       | 09-08-2014    | 09-11-2014    | 3
 user2       | 09-04-2014    | 09-07-2014    | 3
 
+#2: How to Find the Longest Consecutive Series of Events in SQL

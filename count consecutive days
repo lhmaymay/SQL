@@ -34,7 +34,7 @@ WITH
   -- This table contains all the distinct date 
   -- instances in the data set
   dates(date) AS (
-    SELECT DISTINCT user_name,CAST(UserDate AS DATE)
+    SELECT DISTINCT user_name,CAST(UserDate AS DATE) as date,UserCode
     FROM UserTable
   ),
    
@@ -43,13 +43,14 @@ WITH
   -- (with potential gaps). Whenever there is a gap,
   -- there will be a new group
   groups AS (
-    SELECT user_name,
+    SELECT user_name,UserCode,
       ROW_NUMBER() OVER (partition by user_name ORDER BY date) AS rn,
       dateadd(day, -ROW_NUMBER() OVER (parition by user_name ORDER BY date), date) AS grp,
       date
     FROM dates
   )
-SELECT 
+  
+SELECT user_name,grp,
   COUNT(*) AS consecutiveDates,
   MIN(date) AS minDate,
   MAX(date) AS maxDate
@@ -57,3 +58,4 @@ FROM groups
 where UserCode>0
 GROUP BY user_name,grp
 having consecutiveDates>=2
+order by user_name,grp

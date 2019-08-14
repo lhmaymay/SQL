@@ -27,3 +27,32 @@ user1       | 09-08-2014    | 09-11-2014    | 3
 user2       | 09-04-2014    | 09-07-2014    | 3
 
 #2: How to Find the Longest Consecutive Series of Events in SQL
+
+
+WITH
+ 
+  -- This table contains all the distinct date 
+  -- instances in the data set
+  dates(date) AS (
+    SELECT DISTINCT user_name,CAST(UserDate AS DATE)
+    FROM UserTable
+  ),
+   
+  -- Generate "groups" of dates by subtracting the
+  -- date's row number (no gaps) from the date itself
+  -- (with potential gaps). Whenever there is a gap,
+  -- there will be a new group
+  groups AS (
+    SELECT user_name,
+      ROW_NUMBER() OVER (partition by user_name ORDER BY date) AS rn,
+      dateadd(day, -ROW_NUMBER() OVER (parition by user_name ORDER BY date), date) AS grp,
+      date
+    FROM dates
+  )
+SELECT 
+  COUNT(*) AS consecutiveDates,
+  MIN(date) AS minDate,
+  MAX(date) AS maxDate
+FROM groups
+GROUP BY user_name,grp
+ORDER BY 1 DESC, 2 DESC

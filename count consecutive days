@@ -54,5 +54,6 @@ SELECT
   MIN(date) AS minDate,
   MAX(date) AS maxDate
 FROM groups
+where UserCode>0
 GROUP BY user_name,grp
-ORDER BY 1 DESC, 2 DESC
+having consecutiveDates>=2

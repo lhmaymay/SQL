@@ -64,3 +64,21 @@ ON
 LATERAL VIEW posexplode(c.newmodelprobscorepercentile) a1 AS a2, newthreshold
 LATERAL VIEW posexplode(c.oldmodelprobscorepercentile) b1 AS b2, oldthreshold
 WHERE a2 = b2;
+
+DROP TABLE IF EXISTS threshold_output;
+CREATE TABLE IF NOT EXISTS threshold_output
+AS 
+ 
+SELECT d.description as description, d.old as current_threshold, d.oldthreshold as mapped_old, d.newthreshold as mapped_new
+FROM
+(
+SELECT ROW_NUMBER() OVER (PARTITION BY c.description ORDER BY abs(c.difference)) as RowNum_Min, *
+FROM
+(select *, old - oldthreshold as difference from
+(SELECT * FROM table1) a
+LEFT JOIN
+(SELECT * FROM test_w0
+where segment_fine = "offline_model_threshold_1") b
+ON a.segment_table = b.segment_fine) c
+) d
+WHERE d.RowNum_Min = 1

@@ -1,0 +1,13 @@
+SET hive.exec.dynamic.partition=true;
+SET hive.exec.dynamic.partition.mode=nonstrict;
+SET hive.exec.max.dynamic.partitions.pernode=1000;
+SET hive.exec.max.dynamic.partitions=1000;
+SET hive.exec.max.created.files=300000;
+SET hive.exec.reducers.bytes.per.reducer=1073741824;
+SET hive.exec.compress.intermediate=true;
+SET hive.intermediate.compression.codec=org.apache.hadoop.io.compress.SnappyCodec;
+SET hive.intermediate.compression.type=BLOCK;
+SET hive.exec.compress.output=true;
+SET mapreduce.output.fileoutputformat.compress=true;
+SET mapreduce.output.fileoutputformat.compress.codec=org.apache.hadoop.io.compress.SnappyCodec;
+SET mapreduce.output.fileoutputformat.compress.type=BLOCK;

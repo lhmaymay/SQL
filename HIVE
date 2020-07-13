@@ -11,3 +11,20 @@ SET hive.exec.compress.output=true;
 SET mapreduce.output.fileoutputformat.compress=true;
 SET mapreduce.output.fileoutputformat.compress.codec=org.apache.hadoop.io.compress.SnappyCodec;
 SET mapreduce.output.fileoutputformat.compress.type=BLOCK;
+
+
+set hive.cli.print.header=true;
+set start_date = date_sub(CURRENT_DATE, 14);
+set end_date = CURRENT_DATE;
+
+set start_date = date_sub(CURRENT_DATE, 31);
+set end_date = CURRENT_DATE;
+
+concat_ws("|",column1,column2) 
+
+concat(column1,':',columns) 
+
+	FROM table
+	LATERAL VIEW explode(colum3[0])  as rt
+	where ts_date >= ${hiveconf:start_date} and ts_date < ${hiveconf:end_date}
+	

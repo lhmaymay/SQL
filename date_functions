@@ -1,8 +1,8 @@
-(1) DATEDIFF(interval, date1, date2)
+(1) DATEDIFF(interval, date1, date2): date2-date1 
 >=0 if date1>=date2 (date1 is more recent date)
 <0 o.w.
-
-datediff(day,old_date,recent_date) = - 100
+SELECT DATEDIFF(year, '2017/08/25', '2011/08/25') AS DateDiff;
+-6
 
 interval	Required. The part to return. Can be one of the following values:
 year, yyyy, yy = Year
@@ -18,4 +18,20 @@ second, ss, s = Second
 millisecond, ms = Millisecond
 
 
-(2) 
+(2) DATEADD(interval, number, date)
+
+SELECT DATEADD(month, 2, '2017/08/25') AS DateAdd;
+2017-10-25 00:00:00.000
+
+interval	Required. The time/date interval to add. Can be one of the following values:
+year, yyyy, yy = Year
+quarter, qq, q = Quarter
+month, mm, m = month
+dayofyear, dy, y = Day of the year
+day, dd, d = Day
+week, ww, wk = Week
+weekday, dw, w = Weekday
+hour, hh = hour
+minute, mi, n = Minute
+second, ss, s = Second
+millisecond, ms = Millisecond

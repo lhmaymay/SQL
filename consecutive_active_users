@@ -1,0 +1,10 @@
+https://github.com/shawlu95/Beyond-LeetCode-SQL/blob/master/Interview/09_Consecutive_Active_Users/README.md
+
+Given timestamps of logins, figure out how many people on Facebook were active ALL seven days of a week on a mobile phone.
+
+Different from the monthly active user problem, in which active user is defined by those who logged on at least once in the past month, in this problem we define acive users as those who logged on in the past 7 consecutive days. In this problem, we'll require only 3 days. The logic is the same.
+
+Key Concepts
+Self join.
+Window functions.
+

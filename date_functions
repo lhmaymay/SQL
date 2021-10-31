@@ -1,1 +1,21 @@
+(1) DATEDIFF(interval, date1, date2)
+>=0 if date1>=date2 (date1 is more recent date)
+<0 o.w.
+
 datediff(day,old_date,recent_date) = - 100
+
+interval	Required. The part to return. Can be one of the following values:
+year, yyyy, yy = Year
+quarter, qq, q = Quarter
+month, mm, m = month
+dayofyear = Day of the year
+day, dy, y = Day
+week, ww, wk = Week
+weekday, dw, w = Weekday
+hour, hh = hour
+minute, mi, n = Minute
+second, ss, s = Second
+millisecond, ms = Millisecond
+
+
+(2) 

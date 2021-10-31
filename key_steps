@@ -1,0 +1,13 @@
+(1) Ask clarifying questions 
+what is the goal
+metrics
+
+(2) Understand table structures/relationships
+all in table b? inner join or left join?
+missing replacement
+
+(3) Sanity chek
+any missing values
+any duplicates
+
+(4) Edge cases

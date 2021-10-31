@@ -1,0 +1,1 @@
+datediff(day,old_date,recent_date) = - 100

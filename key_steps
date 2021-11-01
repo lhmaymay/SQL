@@ -11,3 +11,5 @@ any missing values
 any duplicates
 
 (4) Edge cases
+0 records
+what if there is a tie for highest/lowest record?

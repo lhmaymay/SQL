@@ -1,0 +1,5 @@
+integeter devide by integer would be integer , need to change to float type , or round to decimals 
+
+round (a/b, 2)
+
+a/b::float

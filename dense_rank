@@ -1,3 +1,26 @@
 RANK gives you the ranking within your ordered partition. Ties are assigned the same rank, with the next ranking(s) skipped. So, if you have 3 items at rank 2, the next rank listed would be ranked 5.
 
 DENSE_RANK again gives you the ranking within your ordered partition, but the ranks are consecutive. No ranks are skipped if there are ranks with multiple items.
+
+
+SELECT
+  v,
+  ROW_NUMBER() OVER (ORDER BY v) row_number,
+  RANK()       OVER (ORDER BY v) rank,
+  DENSE_RANK() OVER (ORDER BY v) dense_rank
+FROM t
+ORDER BY v;
+The above will yield:
+
++---+------------+------+------------+
+| V | ROW_NUMBER | RANK | DENSE_RANK |
++---+------------+------+------------+
+| a |          1 |    1 |          1 |
+| a |          2 |    1 |          1 |
+| a |          3 |    1 |          1 |
+| b |          4 |    4 |          2 |
+| c |          5 |    5 |          3 |
+| c |          6 |    5 |          3 |
+| d |          7 |    7 |          4 |
+| e |          8 |    8 |          5 |
++---+------------+------+------------+

@@ -1,0 +1,13 @@
+table employee has columns id, salary
+find the salary value that is the n-th highest
+return null when no nth highest salary, name it as getNthHighestSalary
+
+
+# Solution 
+WITH cte AS 
+(SELECT a.*, DENSE_RANK() OVER (ORDER BY salary DESC) as rk
+FROM employee a) 
+
+SELECT CASE WHEN COUNT(DISTINCT salary)<N THEN NULL
+ELSE (SELECT DISTINCT salary FROM cte WHERE rk=N) END AS getNthHighestSalary
+FROM employee;

@@ -86,7 +86,7 @@ and a.lon=b.lon
 group by invest_2015
 having cnt>1)
 
-select sum(invest_2016) as invest_2016
+select round(sum(invest_2016),2) as invest_2016
 from table2 a
 inner join insurance b
 on a.invest_2015=b.invest_2015

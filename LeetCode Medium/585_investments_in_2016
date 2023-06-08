@@ -1,0 +1,95 @@
+https://leetcode.com/problems/investments-in-2016/
+
+Table: Insurance
+
++-------------+-------+
+| Column Name | Type  |
++-------------+-------+
+| pid         | int   |
+| tiv_2015    | float |
+| tiv_2016    | float |
+| lat         | float |
+| lon         | float |
++-------------+-------+
+pid is the primary key column for this table.
+Each row of this table contains information about one policy where:
+pid is the policyholder's policy ID.
+tiv_2015 is the total investment value in 2015 and tiv_2016 is the total investment value in 2016.
+lat is the latitude of the policy holder's city. It's guaranteed that lat is not NULL.
+lon is the longitude of the policy holder's city. It's guaranteed that lon is not NULL.
+ 
+
+Write an SQL query to report the sum of all total investment values in 2016 tiv_2016, for all policyholders who:
+
+have the same tiv_2015 value as one or more other policyholders, and
+are not located in the same city like any other policyholder (i.e., the (lat, lon) attribute pairs must be unique).
+Round tiv_2016 to two decimal places.
+
+The query result format is in the following example.
+
+ 
+
+Example 1:
+
+Input: 
+Insurance table:
++-----+----------+----------+-----+-----+
+| pid | tiv_2015 | tiv_2016 | lat | lon |
++-----+----------+----------+-----+-----+
+| 1   | 10       | 5        | 10  | 10  |
+| 2   | 20       | 20       | 20  | 20  |
+| 3   | 10       | 30       | 20  | 20  |
+| 4   | 10       | 40       | 40  | 40  |
++-----+----------+----------+-----+-----+
+Output: 
++----------+
+| tiv_2016 |
++----------+
+| 45.00    |
++----------+
+Explanation: 
+The first record in the table, like the last record, meets both of the two criteria.
+The tiv_2015 value 10 is the same as the third and fourth records, and its location is unique.
+
+The second record does not meet any of the two criteria. Its tiv_2015 is not like any other policyholders and its location is the same as the third record, which makes the third record fail, too.
+So, the result is the sum of tiv_2016 of the first and last record, which is 45.
+
+
+(1) clarifying questions about table structure and data sanity check
+any duplicates
+any missing values
+merge keys
+output format
+    
+(2) clarifying questions about criteria for query
+    Q1: policy holders need to be the only person in the combination of lat and lon
+    Q2: the inverst_2015 has >1 policy holders after applying Q1 filtering criteria  
+
+
+(3) output format
+sum of invest_2016 of those meeting Q2 and Q1 criteria
+column name
+round decimals 
+
+with table1 as 
+(select lat,lon, count(*) as cnt
+from insurance
+group by lat,lon
+having count=1),
+
+table2 as 
+(select invest_2015, count(*) as cnt
+from insurance a
+inner join table1 b
+on a.lat=b.lat
+and a.lon=b.lon
+group by invest_2015
+having cnt>1)
+
+select sum(invest_2016) as invest_2016
+from table2 a
+inner join insurance b
+on a.invest_2015=b.invest_2015
+inner join table1 c
+on b.lat=c.lat
+and b.lon=c.lon

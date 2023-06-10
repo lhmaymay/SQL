@@ -72,19 +72,16 @@ column name
 round decimals 
 
 with table1 as 
-(select lat,lon, count(*) as cnt
+(select lat,lon
 from insurance
 group by lat,lon
-having count=1),
+having count(*)=1),
 
 table2 as 
-(select invest_2015, count(*) as cnt
-from insurance a
-inner join table1 b
-on a.lat=b.lat
-and a.lon=b.lon
+(select invest_2015
+from insurance 
 group by invest_2015
-having cnt>1)
+having count(*)>1)
 
 select round(sum(invest_2016),2) as invest_2016
 from table2 a
